@@ -3,3 +3,11 @@ version: '2.1'
 services:
   base-django:
     build: .
+    volumes:
+      - ./:/code
+    networks:
+      - tm-network
+    working_dir: /code/tm
+    environment:
+      PYTHONUNBUFFERED: 0
+      BROKER_URL: 'redis://broker:6379'
