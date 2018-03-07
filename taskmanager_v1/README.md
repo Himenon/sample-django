@@ -39,37 +39,3 @@ DJANGO_SETTINGS_MODULE=tm.settings celery beat -l info --scheduler django_celery
 DJANGO_SETTINGS_MODULE=tm.settings celery -A tapp_a worker
 ```
 
-
-# コマンド
-
-ユーザーの追加
-
-```bash
-python3 manage.py createsuperuser
-```
-
-マイグレーションの実行
-
-```bash
-python3 manage.py makemigrations
-python3 manage.py migrate
-```
-
-
-プロジョクトの作成
-
-```bash
-django-admin startproject [project name]
-```
-
-アプリの追加
-
-```bash
-python3 manage.py startapp [app name]
-```
-
-ライブラリのインストール
-
-```bash
-pip3 install -r requirements.txt
-```
