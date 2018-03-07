@@ -7,31 +7,50 @@ services:
       service: base-django
     ports:
       - 8050:8000
+    depends_on:
+      - db
+      - broker
     command: python3 manage.py runserver 0.0.0.0:8000
   scheduler:
     extends:
       file: docker-compose.base.yml
       service: base-django
+    depends_on:
+      - db
+      - broker
     command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tapp_a beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile /celerybeat.pid"
   worker-1:
     extends:
       file: docker-compose.base.yml
       service: base-django
+    depends_on:
+      - db
+      - broker
     command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tapp_a worker"
   worker-2:
     extends:
       file: docker-compose.base.yml
       service: base-django
+    depends_on:
+      - db
+      - broker
 #    command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tapp_b beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile /celerybeat.pid"
   broker:
     image: redis
     networks:
       - tm-network
   db:
-    image: postgres
+    image: postgres:9.6
+    ports:
+      - 5432:5432
     networks:
       - tm-network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
 networks:
   tm-network:
     external: true
+
+volumes:
+  pgdata:

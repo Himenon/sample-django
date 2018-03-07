@@ -7,7 +7,13 @@ services:
       - ./:/code
     networks:
       - tm-network
+    restart: always
     working_dir: /code/tm
     environment:
       PYTHONUNBUFFERED: 0
       BROKER_URL: 'redis://broker:6379'
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db
+      DB_PORT: 5432

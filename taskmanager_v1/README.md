@@ -3,12 +3,24 @@
 # Dockerの環境構築
 
 ```bash
-docker-compose build
+docker network create tm-network
+docker docker volume create pgdata
 ```
 
 ```bash
-docker network create tm-network
+# ビルド
+docker-compose build
+# 起動
+docker-compose up
 ```
+
+```bash
+# マイグレーションの実行
+docker-compose run server python3 manage.py migrate
+# 管理ユーザーの作成
+docker-compose run server python3 manage.py createsuperuser
+```
+
 
 # Celeryのコマンド
 
