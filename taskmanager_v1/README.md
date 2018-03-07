@@ -28,3 +28,9 @@ django-admin startproject [project name]
 ```bash
 python3 manage.py startapp [app name]
 ```
+
+ライブラリのインストール
+
+```bash
+pip3 install -r requirements.txt
+```
