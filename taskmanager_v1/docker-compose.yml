@@ -10,6 +10,7 @@ services:
     depends_on:
       - db
       - broker
+      - worker
     command: python3 manage.py runserver 0.0.0.0:8000
   scheduler:
     extends:
@@ -19,22 +20,14 @@ services:
       - db
       - broker
     command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tm beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile /celerybeat.pid"
-  worker-1:
+  worker:
     extends:
       file: docker-compose.base.yml
       service: base-django
     depends_on:
       - db
       - broker
-    command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tapp_a worker"
-  worker-2:
-    extends:
-      file: docker-compose.base.yml
-      service: base-django
-    depends_on:
-      - db
-      - broker
-    command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tapp_b worker"
+    command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tm worker"
   broker:
     image: redis
     networks:
