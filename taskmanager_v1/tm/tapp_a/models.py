@@ -9,7 +9,7 @@ class Counter(models.Model):
         managed = True
 
     def __str__(self):
-        return "Current Count: {}".format(self.count)
+        return "[A{}] Current Count: {}".format(self.id, self.count)
 
     count = models.IntegerField(default=0, null=False, blank=False, help_text='カウント数')
     msg = models.TextField(null=True, blank=True, help_text='メッセージ')

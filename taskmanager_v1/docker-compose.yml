@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
       - broker
-    command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tapp_a beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile /celerybeat.pid"
+    command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tm beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile /celerybeat.pid"
   worker-1:
     extends:
       file: docker-compose.base.yml
@@ -34,7 +34,7 @@ services:
     depends_on:
       - db
       - broker
-#    command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tapp_b beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile /celerybeat.pid"
+    command: bash -c "DJANGO_SETTINGS_MODULE=tm.settings celery -A tapp_b worker"
   broker:
     image: redis
     networks:
