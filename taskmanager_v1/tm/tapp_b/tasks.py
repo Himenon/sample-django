@@ -2,6 +2,7 @@ from celery import shared_task
 from . import models as app_models
 from tapp_a import models as app_a_models
 
+
 @shared_task
 def hello_from_b(*args, **kwargs):
     print("Hello! From B")
