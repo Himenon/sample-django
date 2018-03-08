@@ -1,10 +1,17 @@
 # DjangoでCeleryを使って非同期処理をするためのサンプル
 
-# Dockerの環境構築
+## このサンプルプロジェクトからわかること
+
+- [x] DjangoへのCeleryの追加方法
+- [x] Django Adminからcron/intervalの設定方法
+- [x] Django Admin上にtaskを表示させる方法
+- [x] Djangoに組み込まれたceleryのScheduler / Workerの起動方法
+
+## Dockerの環境構築
 
 ```bash
 docker network create tm-network
-docker docker volume create pgdata
+docker volume create pgdata
 ```
 
 ```bash
@@ -22,7 +29,7 @@ docker-compose run server python3 manage.py createsuperuser
 ```
 
 
-# Celeryのコマンド
+## Celeryのコマンド
 
 
 **schedulerの起動**
